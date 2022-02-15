@@ -1,0 +1,88 @@
+.kreate {
+  width: 80%;
+  height: fit-content;
+  position: absolute;
+  top: 110px;
+  left: 245px;
+  // border: 1px solid #cccccc;
+  margin: 0;
+  padding: 0;
+
+  hr {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .title {
+    // background-color: goldenrod;
+    text-align: center;
+    font-size: 55px;
+    font-weight: 700;
+    font-variant: small-caps;
+    margin-bottom: 40px;
+    color: #000000;
+  }
+
+  .input {
+    display: flex;
+    // background-color: firebrick;
+    padding: 10px;
+    justify-content: center;
+
+    .left {
+      // background-color: gold;
+      width: 70%;
+      padding: 5px;
+
+      .tx {
+        color: #2f503e;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .count {
+        color: black;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        column-gap: 7px;
+        align-items: center;
+
+        span {
+          background-color: #2f503e;
+          border-radius: 50%;
+          display: block;
+          height: 30px;
+          width: 30px;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .butt {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        background-color: black;
+        height: 40px;
+      }
+    }
+  }
+
+  .output {
+    padding: 10px;
+    .text {
+      text-align: start;
+      padding: 40px 100px;
+      background-color: #F1F3F6;
+      font-size: 18px;
+      font-weight: 400;
+      color: #6d768a;
+    }
+  }
+}

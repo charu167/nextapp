@@ -1,0 +1,141 @@
+.main {
+  width: 100%;
+  height: fit-content;
+  padding: 2em 5em 3em 5em;
+  //   background-color: blanchedalmond;
+
+  .title {
+    display: block;
+    text-align: center;
+    font-size: 55px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    display: block;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 30px;
+  }
+
+  .butt {
+    background-color: #66023c;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: none;
+  }
+
+  .cd {
+    height: 25rem;
+  }
+  .cbody {
+    background-color: #ffffff;
+    background-image: linear-gradient(315deg, #ffffff 0%, #d7e1ec 74%);
+    .ctitle {
+      font-size: 25px;
+      font-weight: 500;
+      background-color: rgb(63, 48, 65);
+      color: rgb(255, 255, 255);
+      width: 100%;
+      text-align: center;
+      border-radius: 2px;
+    }
+
+    .price {
+      font-size: 40px;
+      font-weight: 700;
+      font-style: italic;
+      // color: whitesmoke;
+    }
+  }
+
+  .detail {
+    width: 100%;
+
+    .imgContainer {
+      width: 30px;
+      height: 30px;
+      // background-color: black;
+    }
+
+    .serviceContainer {
+      margin-left: 10px;
+      font-weight: 500;
+    }
+  }
+}
+
+// Toggle Switch
+.toggle {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  padding: 5px;
+  margin-bottom: 80px;
+  align-items: center;
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 14rem;
+    height: 2.5rem;
+    border-radius: 60px;
+    margin-right: 10px;
+
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+
+      &:checked + ::before {
+        transform: translateX(7rem);
+      }
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50px;
+      background-color: #000000;
+
+      .sliderText {
+        color: white;
+        position: absolute;
+        margin-top: 6px;
+        font-size: 20px;
+        font-weight: 500;
+
+        &:nth-child(1) {
+          left: 20px;
+        }
+
+        &:nth-child(2) {
+          right: 20px;
+        }
+      }
+
+      &::before {
+        position: absolute;
+        content: "";
+        height: 2.5rem;
+        width: 7rem;
+        background-color: #7a7928;
+        transition: all 0.2s ease-in-out;
+        border-radius: 20px;
+      }
+    }
+  }
+
+  .text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #7f7979;
+  }
+}

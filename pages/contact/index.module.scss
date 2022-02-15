@@ -1,0 +1,29 @@
+.contact {
+  .butt {
+    background-color: black;
+    height: 40px;
+    width: 65%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .frm {
+    width: 70%;
+    margin: auto;
+    background-color: rgb(235, 232, 228);
+
+    .title {
+      font-size: 55px;
+      font-weight: 600;
+      text-align: start;
+    }
+
+    .subtitle {
+      text-align: start;
+      font-size: 20px;
+      font-weight: 400;
+    }
+  }
+}

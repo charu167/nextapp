@@ -1,0 +1,37 @@
+.sidebar {
+  background-color: #1a1110;
+  width: 240px;
+  position: fixed;
+  left: 0;
+  top: 96px;
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 200px;
+  color: rgb(255, 255, 255);
+
+  .title {
+    font-variant: small-caps;
+    // text-align: center;
+
+    font-size: 40px;
+  }
+
+  .products {
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      background-color: rgb(61, 54, 68);
+    }
+
+    .product {
+      color: rgb(236, 217, 217);
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+}
