@@ -5,7 +5,7 @@ import Sidebar from "../../../components/sidebar";
 import { Form, Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import data from "./data";
+import { data } from "./data";
 
 export default function Rekap() {
   const router = useRouter();

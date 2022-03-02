@@ -1,3 +1,9 @@
+import React from "react";
+
+export default function Data() {
+  return <div>data</div>;
+}
+
 const data = [
   {
     input_group: { content: "" },
@@ -93,4 +99,4 @@ const data = [
   },
 ];
 
-export default data;
+export { data };

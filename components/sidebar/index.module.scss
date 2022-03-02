@@ -11,9 +11,15 @@
 
   .title {
     font-variant: small-caps;
-    // text-align: center;
-
     font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    span :nth-child(2) {
+      // background-color: rgb(72, 86, 99);
+
+    }
   }
 
   .products {

@@ -53,58 +53,60 @@ export default function Auth({
   };
 
   return (
-    <div>
+    <>
       <Navbar1 />
-      <Container className={`${styles.mainContainer} ${"mt-4"}`}>
-        <Row>
-          <Col className={styles.col1}>
-            <Image
-              className={styles.img}
-              src={pic !== "login" ? pic_login : pic_register}
-            />
-            {/* <span className={styles.text}>{text}</span> */}
-          </Col>
-          <Col className={`${styles.mainForm} ${""}`}>
-            <Image src={logo1} width={360} height={150} />
-            <Form
-              className={`${
-                styles.frm
-              } ${" d-flex flex-column justify-content-start p-5 "}`}
-            >
-              <h3 className="mb-3">{title_text}</h3>
-              {input_names.map((e, i) => {
-                return (
-                  <Form.Group
-                    key={i}
-                    className="mb-4"
-                    controlId="formBasicPassword"
-                  >
-                    <Form.Control
-                      onChange={(event) => {
-                        setInput({
-                          ...input,
-                          [e.name]: event.target.value,
-                        });
-                      }}
-                      type={e.type}
-                      placeholder={e.placeholder}
-                    />
-                  </Form.Group>
-                );
-              })}
-
-              <Button
-                onClick={handleClick}
-                variant="dark"
-                className={styles.butt}
-                size="lg"
+      <div className={styles.auth}>
+        <Container className={`${styles.mainContainer}`}>
+          <Row>
+            <Col className={styles.col1}>
+              <Image
+                className={styles.img}
+                src={pic !== "login" ? pic_login : pic_register}
+              />
+              {/* <span className={styles.text}>{text}</span> */}
+            </Col>
+            <Col className={`${styles.mainForm} ${""}`}>
+              <Image src={logo1} width={360} height={150} />
+              <Form
+                className={`${
+                  styles.frm
+                } ${" d-flex flex-column justify-content-start p-5 "}`}
               >
-                {spin === 1 ? <Spinner animation="border" /> : btn_text}
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+                <h3 className="mb-3">{title_text}</h3>
+                {input_names.map((e, i) => {
+                  return (
+                    <Form.Group
+                      key={i}
+                      className="mb-4"
+                      controlId="formBasicPassword"
+                    >
+                      <Form.Control
+                        onChange={(event) => {
+                          setInput({
+                            ...input,
+                            [e.name]: event.target.value,
+                          });
+                        }}
+                        type={e.type}
+                        placeholder={e.placeholder}
+                      />
+                    </Form.Group>
+                  );
+                })}
+
+                <Button
+                  onClick={handleClick}
+                  variant="dark"
+                  className={styles.butt}
+                  size="lg"
+                >
+                  {spin === 1 ? <Spinner animation="border" /> : btn_text}
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+    </>
   );
 }

@@ -1,3 +1,4 @@
+import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.scss";
@@ -7,9 +8,19 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Navbar1 from "../components/navbar/navbar";
 import brain from "../assets/Pics/brain.png";
 import netflix from "../assets/icons/netflix.webp";
-// import tesla from "https://cdn.worldvectorlogo.com/logos/tesla-9.svg";
+import OffsetContext from "../context/offsetContext";
 
 export default function Home() {
+  const { yoffset } = useContext(OffsetContext);
+
+  const [yoffset1, setYoffset1] = useState(0);
+
+  useEffect(() => {
+    setYoffset1(yoffset);
+  });
+
+  console.log(yoffset1);
+
   return (
     <>
       <Navbar1 />
@@ -65,6 +76,51 @@ export default function Home() {
               <Image src={netflix} width={300} height={160} />
               <Image src={netflix} width={300} height={160} />
               <Image src={netflix} width={300} height={160} />
+            </Row>
+          </Container>
+        </div>
+
+        <div className={styles.howitworks}>
+          <h1 className={styles.title}>How it works</h1>
+          <Container>
+            <Row
+              className={`${styles.step} my-2 ${
+                yoffset1 > 1000 ? styles.slide : null
+              }`}
+            >
+              <h2>Step 1</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Placeat voluptas ducimus sunt incidunt, corporis consequatur
+                molestias ab sit, vitae id nostrum similique blanditiis rerum.
+                Nostrum?
+              </p>
+            </Row>
+            <Row
+              className={`${styles.step} my-2 ${
+                yoffset1 > 1000 ? styles.slide : null
+              }`}
+            >
+              <h2>Step 2</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Placeat voluptas ducimus sunt incidunt, corporis consequatur
+                molestias ab sit, vitae id nostrum similique blanditiis rerum.
+                Nostrum?
+              </p>
+            </Row>
+            <Row
+              className={`${styles.step} my-2 ${
+                yoffset1 > 1000 ? styles.slide : null
+              }`}
+            >
+              <h2>Step 3</h2>
+              <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Placeat voluptas ducimus sunt incidunt, corporis consequatur
+                molestias ab sit, vitae id nostrum similique blanditiis rerum.
+                Nostrum?
+              </p>
             </Row>
           </Container>
         </div>

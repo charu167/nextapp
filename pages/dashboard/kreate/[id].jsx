@@ -1,4 +1,4 @@
-import Router from "next/router";
+import { useRouter } from "next/router";
 import styles from "./id.module.scss";
 import Navbar2 from "../../../components/navbar2";
 import Sidebar from "../../../components/sidebar";
@@ -8,7 +8,8 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Kreate() {
-  const query = Router.query;
+  const router = useRouter();
+  const query = router.query;
 
   const [spin, setSpin] = useState(0);
 

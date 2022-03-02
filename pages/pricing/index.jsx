@@ -3,10 +3,10 @@ import styles from "./index.module.scss";
 import { Container, Col, Row, Card, ListGroup, Button } from "react-bootstrap";
 import tick from "../../assets/icons/checkmark.png";
 import Image from "next/image";
-import data from "./data";
+import { data } from "./data";
 import { useState } from "react";
 
-export default function index() {
+export default function Index() {
   const [yearly, setYearly] = useState(false);
   return (
     <>
@@ -50,11 +50,19 @@ export default function index() {
                       <Card.Subtitle
                         className={`${"mb-3 mt-2"} ${styles.price}`}
                       >
-                        {yearly
-                          ? `$ ${e.costPerYear}/year`
-                          : `$ ${e.costPerMonth}/month`}{" "}
+                        {
+                          <>
+                            <span>$ </span>
+                            <span>
+                              {yearly ? e.costPerYear : e.costPerMonth}
+                            </span>
+                            <span> {yearly ? "/year" : "/month"}</span>
+                          </>
+                        }{" "}
                       </Card.Subtitle>
-                      <Card.Text className="text-muted text-center">{e.desc}</Card.Text>
+                      <Card.Text className={`text-center ${styles.desc}`}>
+                        {e.desc}
+                      </Card.Text>
                     </Card.Body>
                     <ListGroup className={`${"list-group-flush"} ${styles.cd}`}>
                       <Container fluid>

@@ -1,37 +1,44 @@
-.mainContainer {
-  .col1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    @media screen and (max-width: 1000px) {
-      display: none;
-      visibility: hidden;
-    }
-  }
-  .text {
-    font-size: 30px;
-    font-weight: 500;
-    font-style: italic;
-    text-align: center;
-    display: block;
-    margin-top: 10px;
-  }
-  .mainForm {
-    .frm {
-      width: 90%;
-      height: 100%;
-
+.auth {
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+  height: 5rem;
+  padding-top: 6rem;
+  .mainContainer {
+    background-color: white;
+    .col1 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       @media screen and (max-width: 1000px) {
-        width: 100%;
+        display: none;
+        visibility: hidden;
       }
+    }
+    .text {
+      font-size: 30px;
+      font-weight: 500;
+      font-style: italic;
+      text-align: center;
+      display: block;
+      margin-top: 10px;
+    }
+    .mainForm {
+      .frm {
+        width: 90%;
+        height: 100%;
 
-      .butt {
-        background-color: black;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @media screen and (max-width: 1000px) {
+          width: 100%;
+        }
+
+        .butt {
+          background-color: black;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
   }

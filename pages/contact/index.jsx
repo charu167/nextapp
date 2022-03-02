@@ -4,7 +4,7 @@ import { Form, Row, Container, Col, Button } from "react-bootstrap";
 import { useState } from "react";
 import axios from "axios";
 
-export default function index() {
+export default function Index() {
   const [input, setInput] = useState({
     name: "",
     email: "",
@@ -35,13 +35,13 @@ export default function index() {
     <>
       <Navbar1 />
       <div className={styles.contact}>
+        <h1 className={`${styles.title} mb-2`}>Contact Us</h1>
+        <h4 className={`${styles.subtitle} mb-5`}>
+          How can we help you out? If you fill out the form below, we will try
+          to get back to you ASAP!
+        </h4>
         <Form className={`${styles.frm} mt-5 p-5`}>
           <Container>
-            <h1 className={`${styles.title} mb-2`}>Contact Us</h1>
-            <h4 className={`${styles.subtitle} mb-5`}>
-              How can we help you out? If you fill out the form below, we will
-              try to get back to you ASAP!
-            </h4>
             <Row>
               <Col>
                 <Form.Group

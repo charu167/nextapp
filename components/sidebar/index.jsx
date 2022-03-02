@@ -1,4 +1,5 @@
 import styles from "./index.module.scss";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Container,
@@ -11,6 +12,7 @@ import {
   Navbar,
 } from "react-bootstrap";
 import { useState } from "react";
+import darrow from "../../assets/icons/downward-arrow.png";
 
 export default function Sidebar() {
   const [kreate, setKreate] = useState([
@@ -38,7 +40,12 @@ export default function Sidebar() {
     <Container fluid className={styles.sidebar}>
       <Col>
         <Row>
-          <h1 className={styles.title}>Rekap</h1>
+          <h1 className={styles.title}>
+            <span>Rekap</span>
+            <span>
+              <Image width={30} height={30} src={darrow} />
+            </span>
+          </h1>
           {kreate.map((e, i) => {
             return (
               <Link key={i} passHref href={e.link}>

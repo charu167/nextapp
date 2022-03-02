@@ -3,7 +3,7 @@ import Navbar2 from "../../components/navbar2";
 import Sidebar from "../../components/sidebar/index";
 import { Container } from "react-bootstrap";
 
-export default function index() {
+export default function Index() {
   return (
     <div>
       <Navbar2 />

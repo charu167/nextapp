@@ -1,7 +1,7 @@
 import React from "react";
 import Auth from "../../components/auth";
 
-export default function index() {
+export default function Index() {
   const input_group = {
     username: "",
     password: "",

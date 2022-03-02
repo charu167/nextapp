@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   Navbar,
   Container,
@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import logo from "../../assets/Logo/logo.png";
 import logo1 from "../../assets/Logo/logo1.png";
+import offsetContext from "../../context/offsetContext";
 import styles from "./navbar.module.scss";
 
 export default function Navbar1() {
@@ -28,16 +29,30 @@ export default function Navbar1() {
     { name: "Blog", link: "/blog" },
   ]);
 
+  const [yoffset1, setYoffset1] = useState(0);
+
+  const { yoffset } = useContext(offsetContext);
+
+  useEffect(() => {
+    setYoffset1(yoffset);
+  });
+
   return (
     <Navbar
-      className={`${styles.CustomNav} ${"sticky-top"}`}
+      className={`${styles.CustomNav} ${"fixed-top"} ${
+        yoffset1 > 20 ? styles.scrolled : null
+      }`}
       bg="transperant"
       variant="light"
       expand="lg"
     >
       <Container fluid className={`${styles.navCon} ${"px-4"}`}>
         <Navbar.Brand href="#home">
-          <Image src={logo1} width={240} height={100} />
+          <Image
+            src={yoffset1 > 20 ? logo1 : logo}
+            width={yoffset1 > 20 ? 168 : 240}
+            height={yoffset1 > 20 ? 70 : 100}
+          />
         </Navbar.Brand>
 
         <Row>
@@ -47,13 +62,44 @@ export default function Navbar1() {
               {navLinks.map((e, i) => {
                 return (
                   <Link key={i} passHref href={e.link}>
-                    <Nav.Link className="mx-2">{e.name}</Nav.Link>
+                    <Nav.Link
+                      style={
+                        yoffset1 > 20
+                          ? {
+                              color: "black",
+                              trasition: "all 0.3s ease-in-out",
+                            }
+                          : {
+                              color: "white",
+                              trasition: "all 0.3s ease-in-out",
+                            }
+                      }
+                      className="mx-2"
+                    >
+                      {e.name}
+                    </Nav.Link>
                   </Link>
                 );
               })}
 
               <NavDropdown
-                title="More"
+                title={
+                  <span
+                    style={
+                      yoffset1 > 20
+                        ? {
+                            color: "black",
+                            trasition: "all 0.3s ease-in-out",
+                          }
+                        : {
+                            color: "white",
+                            trasition: "all 0.3s ease-in-out",
+                          }
+                    }
+                  >
+                    More
+                  </span>
+                }
                 id="basic-nav-dropdown"
                 className="mx-2"
               >
@@ -67,7 +113,9 @@ export default function Navbar1() {
               </NavDropdown>
               <Link passHref href="#freetrial">
                 <Nav.Link className="mx-2">
-                  <Button variant="dark">Free Trial</Button>
+                  <Button variant={yoffset1 > 20 ? "dark" : "light"}>
+                    Free Trial
+                  </Button>
                 </Nav.Link>
               </Link>
             </Nav>
