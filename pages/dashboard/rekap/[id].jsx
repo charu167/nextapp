@@ -1,4 +1,4 @@
-import { useRouter } from "next/Router";
+import { useRouter } from "next/router";
 import styles from "./id.module.scss";
 import Navbar2 from "../../../components/navbar2";
 import Sidebar from "../../../components/sidebar";
