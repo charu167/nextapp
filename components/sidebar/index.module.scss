@@ -14,11 +14,18 @@
     font-size: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0px 20px;
+  }
 
-    span :nth-child(2) {
-      // background-color: rgb(72, 86, 99);
+  .links {
+    background-color: darkcyan;
+    transition: all 1s ease-in-out;
+    overflow: hidden;
+    height: 0px;
 
+    &.activate {
+      height: fit-content;
     }
   }
 

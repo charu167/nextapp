@@ -1,9 +1,20 @@
 import styles from "./index.module.scss";
 import Navbar2 from "../../components/navbar2";
 import Sidebar from "../../components/sidebar/index";
+import { useRouter } from "next/router";
 import { Container } from "react-bootstrap";
+import { useEffect, useContext } from "react";
+
+import AuthContext from "../../context/authContext";
 
 export default function Index() {
+  const { isLoggedIn } = useContext(AuthContext);
+  const Router = useRouter();
+
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
+
   return (
     <div>
       <Navbar2 />

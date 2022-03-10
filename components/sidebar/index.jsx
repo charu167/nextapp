@@ -46,16 +46,18 @@ export default function Sidebar() {
               <Image width={30} height={30} src={darrow} />
             </span>
           </h1>
-          {kreate.map((e, i) => {
-            return (
-              <Link key={i} passHref href={e.link}>
-                <Nav.Link className={`${"mx-0 my-2 "} ${styles.products}`}>
-                  <span className={styles.product}>{e.name}</span>
-                  <span className={styles.product}>{e.count}</span>
-                </Nav.Link>
-              </Link>
-            );
-          })}
+          <div className={styles.links & styles.activate}>
+            {kreate.map((e, i) => {
+              return (
+                <Link key={i} passHref href={e.link}>
+                  <Nav.Link className={`${"mx-0 my-2 "} ${styles.products}`}>
+                    <span className={styles.product}>{e.name}</span>
+                    <span className={styles.product}>{e.count}</span>
+                  </Nav.Link>
+                </Link>
+              );
+            })}
+          </div>
         </Row>
         <hr />
         <Row>

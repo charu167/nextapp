@@ -4,12 +4,15 @@ import Navbar2 from "../../../components/navbar2";
 import Sidebar from "../../../components/sidebar";
 import { Form, Button, Spinner } from "react-bootstrap";
 import Toggle from "../../../components/toggle";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
+import AuthContext from "../../../context/authContext";
+
 export default function Kreate() {
-  const router = useRouter();
-  const query = router.query;
+  const { isLoggedIn } = useContext(AuthContext);
+  const Router = useRouter();
+  const query = Router.query;
 
   const [spin, setSpin] = useState(0);
 
@@ -19,6 +22,10 @@ export default function Kreate() {
   });
 
   const [output, setOutput] = useState("");
+
+  useEffect(() => {
+    isLoggedIn();
+  }, []);
 
   const handleClick = async (event) => {
     event.preventDefault();

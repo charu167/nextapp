@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 import Navbar1 from "../../components/navbar/navbar";
 import { Container, Col, Row, Form, Button, Spinner } from "react-bootstrap";
 import Image from "next/image";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import pic_login from "../../assets/Pics/register.svg";
 import pic_register from "../../assets/Pics/login.svg";
 import logo1 from "../../assets/Logo/logo1.png";
@@ -22,6 +22,8 @@ export default function Auth({
   const [input, setInput] = useState(input_group);
   const [spin, setSpin] = useState(0);
 
+  const Router = useRouter();
+
   const handleClick = async (event) => {
     // for (let i = 0; i < input_names.lenght; i++) {
     //   if (input[input_names[i]] === "") {
@@ -33,9 +35,11 @@ export default function Auth({
     setSpin(1);
 
     const formdata = new FormData();
-    formdata.append("username", input.username);
-    formdata.append("password", input.password);
+    for (let i = 0; i < input_names.length; i++) {
+      formdata.append(input_names[i].name, input[input_names[i].name]);
+    }
 
+    console.log(formdata);
     await axios
       .post("http://18.117.194.28/" + api, formdata)
       .then((res) => {
@@ -43,12 +47,13 @@ export default function Auth({
         localStorage.setItem("expiry", res.data.expiry);
         localStorage.setItem("token", res.data.token);
         setSpin(0);
-        // Router.push(push);
+        if (localStorage.getItem("token")) {
+          Router.push(push);
+        }
       })
       .catch((err) => {
         console.log(err);
         setSpin(0);
-        // Router.push("/dashboard");
       });
   };
 

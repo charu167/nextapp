@@ -1,14 +1,17 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/Router";
 import styles from "./id.module.scss";
 import Navbar2 from "../../../components/navbar2";
 import Sidebar from "../../../components/sidebar";
 import { Form, Button, Spinner } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { data } from "./data";
 
+import AuthContext from "../../../context/authContext";
+
 export default function Rekap() {
-  const router = useRouter();
+  const { isLoggedIn } = useContext(AuthContext);
+  const Router = useRouter();
 
   //Usefull Usestates
   const [localData, setLocalData] = useState({
@@ -23,54 +26,38 @@ export default function Rekap() {
   const [output, setOutput] = useState("");
   const [input, setInput] = useState(localData.input_group);
   const [count, setCount] = useState(50);
-  const [id, setId] = useState(router.query.id);
-  console.log(input);
+  const [id, setId] = useState(Router.query.id);
+
+  //SETTING LOCAL DATA
+  const handleData = () => {
+    setLocalData(data[Router.query.id - 1]);
+    if (Router.query.id !== id) {
+      setId(Router.query.id);
+      setInput(null);
+    }
+  };
+
+  //COUNT
+  const checkCount = async () => {
+    await axios
+      .get("http://18.117.194.28/callback/", {
+        params: {
+          productid: localData.product_id,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setCount(res.data.count);
+        if (res.data.count <= 0) {
+          Router.push("/dashboard");
+        }
+      })
+      .catch((err) => [console.log(err)]);
+  };
 
   useEffect(() => {
-    //Setting Local Data
-
-    const handleData = () => {
-      setLocalData(data[router.query.id - 1]);
-      if (router.query.id !== id) {
-        setId(router.query.id);
-        setInput(null);
-      }
-    };
-
-    //Login Check
-    const handleNavigate = () => {
-      const d = new Date();
-      if (
-        localStorage.getItem("expiry") === null ||
-        d.getTime() > Date.parse(localStorage.getItem("expiry"))
-      ) {
-        // router.push("/login");
-      } else {
-      }
-    };
-    handleData();
-    // handleNavigate();
-  });
-
-  //Count
-  useEffect(() => {
-    const checkCount = async () => {
-      await axios
-        .get("http://18.117.194.28/callback/", {
-          params: {
-            productid: localData.product_id,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setCount(res.data.count);
-          if (res.data.count <= 0) {
-            router.push("/dashboard");
-          }
-        })
-        .catch((err) => [console.log(err)]);
-    };
-    // checkCount();
+    isLoggedIn();
+    checkCount();
   }, []);
 
   //Generator Funtion

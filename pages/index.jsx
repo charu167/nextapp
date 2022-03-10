@@ -9,9 +9,12 @@ import Navbar1 from "../components/navbar/navbar";
 import brain from "../assets/Pics/brain.png";
 import netflix from "../assets/icons/netflix.webp";
 import OffsetContext from "../context/offsetContext";
+import AuthCOntext from "../context/authContext";
+import AuthContext from "../context/authContext";
 
 export default function Home() {
   const { yoffset } = useContext(OffsetContext);
+  const { isLoggedIn } = useContext(AuthContext);
 
   const [yoffset1, setYoffset1] = useState(0);
 
@@ -47,9 +50,9 @@ export default function Home() {
             </Row>
             <Row className={styles.heroBottom}>
               <Col>
-                <Link href="#" passHref>
+                <Link href={isLoggedIn ? "/dashboard" : "#"} passHref>
                   <Button className={`${styles.butt1}`} variant="dark">
-                    Start Free trial
+                    {isLoggedIn ? "Go to Dashboard" : "start free trial"}
                   </Button>
                 </Link>
               </Col>
