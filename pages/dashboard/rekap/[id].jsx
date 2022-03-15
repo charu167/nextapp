@@ -13,27 +13,31 @@ export default function Rekap() {
   const { isLoggedIn } = useContext(AuthContext);
   const Router = useRouter();
 
-  //Usefull Usestates
-  const [localData, setLocalData] = useState({
-    input_group: {},
-    input_count: null,
-    api: "#",
-    input_names: [{ name: "", count: null, placeholder: "" }],
-    title: "",
-    product_id: 0,
-  });
+  //Useful Usestates
+  const [localData, setLocalData] = useState(null);
   const [spin, setSpin] = useState(0);
-  const [output, setOutput] = useState("");
-  const [input, setInput] = useState(localData.input_group);
-  const [count, setCount] = useState(50);
-  const [id, setId] = useState(Router.query.id);
+  const [output, setOutput] = useState(null);
+  const [input, setInput] = useState(null);
+  const [count, setCount] = useState(null);
+  const [id, setId] = useState(null);
 
   //SETTING LOCAL DATA
   const handleData = () => {
-    setLocalData(data[Router.query.id - 1]);
-    if (Router.query.id !== id) {
-      setId(Router.query.id);
-      setInput(null);
+    if (checkID()) {
+      setLocalData(data[Router.query.id - 1]);
+      console.log(localData);
+    } else {
+      return;
+    }
+  };
+
+  //CHECK ID
+  const checkID = () => {
+    setId(Router.query.id);
+    if (id === Router.query.id) {
+      return true;
+    } else {
+      return false;
     }
   };
 
@@ -42,12 +46,13 @@ export default function Rekap() {
     await axios
       .get("http://18.117.194.28/callback/", {
         params: {
-          productid: localData.product_id,
+          productid: localData === null ? null : localData.product_id,
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCount(res.data.count);
+        // setCount(res.data.context);
         if (res.data.count <= 0) {
           Router.push("/dashboard");
         }
@@ -56,9 +61,11 @@ export default function Rekap() {
   };
 
   useEffect(() => {
+    handleData();
     isLoggedIn();
     checkCount();
-  }, []);
+    checkID();
+  });
 
   //Generator Funtion
   const handleGenerator = async (event) => {
@@ -90,7 +97,9 @@ export default function Rekap() {
       <Sidebar />
 
       <div className={styles.kreate}>
-        <h1 className={styles.title}>{localData.title}</h1>
+        <h1 className={styles.title}>
+          {localData === null ? null : localData.title}
+        </h1>
         <div className={styles.input}>
           <div className={styles.left}>
             <Form.Group
@@ -104,23 +113,28 @@ export default function Rekap() {
                 </span>
               </Form.Label>
 
-              {localData.input_names.map((e, i) => {
-                return (
-                  <>
-                    <Form.Control
-                      key={i}
-                      as="textarea"
-                      rows={e.count}
-                      placeholder={e.placeholder}
-                      // value={input[localData.input_names.name]}
-                      onChange={(event) => {
-                        setInput({ ...input, [e.name]: event.target.value });
-                      }}
-                    />
-                    <br />
-                  </>
-                );
-              })}
+              {localData === null
+                ? null
+                : localData.input_names.map((e, i) => {
+                    return (
+                      <>
+                        <Form.Control
+                          key={i}
+                          as="textarea"
+                          rows={e.count}
+                          placeholder={e.placeholder}
+                          // value={input[localData.input_names.name]}
+                          onChange={(event) => {
+                            setInput({
+                              ...input,
+                              [e.name]: event.target.value,
+                            });
+                          }}
+                        />
+                        <br />
+                      </>
+                    );
+                  })}
             </Form.Group>
             <Button
               onClick={handleGenerator}
@@ -142,7 +156,7 @@ export default function Rekap() {
           </div>
         </div>
         <hr />
-        {output === "" ? null : (
+        {output === null ? null : (
           <div className={styles.output}>
             <div className={styles.text}>{output}</div>
           </div>

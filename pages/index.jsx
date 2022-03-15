@@ -22,8 +22,6 @@ export default function Home() {
     setYoffset1(yoffset);
   });
 
-  console.log(yoffset1);
-
   return (
     <>
       <Navbar1 />
@@ -50,9 +48,9 @@ export default function Home() {
             </Row>
             <Row className={styles.heroBottom}>
               <Col>
-                <Link href={isLoggedIn ? "/dashboard" : "#"} passHref>
+                <Link href={isLoggedIn() ? "/dashboard" : "#"} passHref>
                   <Button className={`${styles.butt1}`} variant="dark">
-                    {isLoggedIn ? "Go to Dashboard" : "start free trial"}
+                    {isLoggedIn() ? "Go to Dashboard" : "start free trial"}
                   </Button>
                 </Link>
               </Col>
