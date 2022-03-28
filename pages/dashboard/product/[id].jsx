@@ -13,6 +13,13 @@ export default function Rekap() {
   const { isLoggedIn } = useContext(AuthContext);
   const Router = useRouter();
 
+  //LOGIN CHECK
+  const loginCheck = () => {
+    if (!isLoggedIn()) {
+      Router.push("/login");
+    }
+  };
+
   //Useful Usestates
   const [localData, setLocalData] = useState(null);
   const [spin, setSpin] = useState(0);
@@ -25,7 +32,7 @@ export default function Rekap() {
   const handleData = () => {
     if (checkID()) {
       setLocalData(data[Router.query.id - 1]);
-      console.log(localData);
+      // console.log(localData);
     } else {
       return;
     }
@@ -48,11 +55,12 @@ export default function Rekap() {
         params: {
           productid: localData === null ? null : localData.product_id,
         },
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("access"),
+        },
       })
       .then((res) => {
-        // console.log(res.data);
         setCount(res.data.count);
-        // setCount(res.data.context);
         if (res.data.count <= 0) {
           Router.push("/dashboard");
         }
@@ -62,7 +70,7 @@ export default function Rekap() {
 
   useEffect(() => {
     handleData();
-    isLoggedIn();
+    // loginCheck();
     checkCount();
     checkID();
   });
@@ -80,7 +88,11 @@ export default function Rekap() {
     }
 
     await axios
-      .post("http://18.117.194.28/" + localData.api, formdata)
+      .post("http://18.117.194.28/" + localData.api, formdata, {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("access")
+        }
+      })
       .then((res) => {
         setOutput(res.data.content);
         setSpin(0);

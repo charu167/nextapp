@@ -8,6 +8,7 @@ import pic_register from "../../assets/Pics/login.svg";
 import logo1 from "../../assets/Logo/logo1.png";
 import axios from "axios";
 import { useState } from "react";
+import jwtDecode from "jwt-decode";
 
 export default function Auth({
   api,
@@ -39,16 +40,18 @@ export default function Auth({
       formdata.append(input_names[i].name, input[input_names[i].name]);
     }
 
-    console.log(formdata);
     await axios
       .post("http://18.117.194.28/" + api, formdata)
       .then((res) => {
-        console.log(res.data);
-        localStorage.setItem("expiry", res.data.expiry);
-        localStorage.setItem("token", res.data.token);
+        if (res.status === 200) {
+          localStorage.setItem("access", res.data.token.access);
+          localStorage.setItem("refresh", res.data.token.refresh);
+        }
         setSpin(0);
+        const info = jwtDecode(res.data.token.access);
+        const d = Date(info.exp);
         if (localStorage.getItem("token")) {
-          Router.push(push);
+          Router.push("/dashboard");
         }
       })
       .catch((err) => {

@@ -11,8 +11,16 @@ export default function Index() {
   const { isLoggedIn } = useContext(AuthContext);
   const Router = useRouter();
 
+  //LOGIN CHECK
+  // const loginCheck = () => {
+  //   if (!isLoggedIn()) {
+  //     Router.push("/login");
+  //   }
+  // };
+
   useEffect(() => {
-    isLoggedIn();
+    // isLoggedIn();
+    // loginCheck();
   }, []);
 
   return (

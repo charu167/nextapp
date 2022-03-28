@@ -3,12 +3,12 @@ import Auth from "../../components/auth";
 
 export default function Index() {
   const input_group = {
-    username: "",
+    email: "",
     password: "",
   };
 
   const input_names = [
-    { name: "username", type: "text", placeholder: "Username" },
+    { name: "email", type: "text", placeholder: "Email" },
     { name: "password", type: "password", placeholder: "Password" },
   ];
 

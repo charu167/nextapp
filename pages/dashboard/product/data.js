@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Data() {
-  return <div>data</div>;
+  return <div>Go fuck yourself</div>;
 }
 
 const data = [

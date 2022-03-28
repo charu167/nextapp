@@ -11,8 +11,8 @@ import {
   Nav,
   Navbar,
 } from "react-bootstrap";
-import { useState } from "react";
-import darrow from "../../assets/icons/downward-arrow.png";
+import { useEffect, useState } from "react";
+import darrow from "../../assets/icons/darrow.png";
 
 export default function Sidebar() {
   const [kreate, setKreate] = useState([
@@ -36,43 +36,78 @@ export default function Sidebar() {
     { name: "Blog Outro Generator", count: 50, link: "/9" },
   ]);
 
+  const [products, setProducts] = useState([
+    {
+      title: "marketing",
+      activate: false,
+      items: [
+        { name: "Content Generator", count: 50, link: "/1" },
+        { name: "Facebook Ad Generator", count: 50, link: "/2" },
+        { name: "Tagline Generator", count: 50, link: "/3" },
+      ],
+    },
+    {
+      title: "academia",
+      activate: false,
+      items: [
+        { name: "Email Generator", count: 50, link: "/4" },
+        { name: "Description Generator", count: 50, link: "/5" },
+        { name: "Headline Generator", count: 50, link: "/6" },
+      ],
+    },
+  ]);
+
   return (
     <Container fluid className={styles.sidebar}>
       <Col>
-        <Row>
-          <h1 className={styles.title}>
-            <span>Rekap</span>
-            <span>
-              <Image width={30} height={30} src={darrow} />
-            </span>
-          </h1>
-          <div className={styles.links & styles.activate}>
-            {kreate.map((e, i) => {
-              return (
-                <Link key={i} passHref href={e.link}>
-                  <Nav.Link className={`${"mx-0 my-2 "} ${styles.products}`}>
-                    <span className={styles.product}>{e.name}</span>
-                    <span className={styles.product}>{e.count}</span>
-                  </Nav.Link>
-                </Link>
-              );
-            })}
-          </div>
-        </Row>
-        <hr />
-        <Row>
-          <h1 className={styles.title}>Kreate</h1>
-          {rekap.map((e, i) => {
-            return (
-              <Link key={i} passHref href={`/dashboard/rekap${e.link}`}>
-                <Nav.Link className={`${"mx-0 my-2 "} ${styles.products}`}>
-                  <span className={styles.product}>{e.name}</span>
-                  <span className={styles.product}>{e.count}</span>
-                </Nav.Link>
-              </Link>
-            );
-          })}
-        </Row>
+        {products.map((e, i) => {
+          return (
+            <Row key={i}>
+              <h1
+                onClick={() => {
+                  setProducts(
+                    products.map((es, is) =>
+                      e.title === es.title
+                        ? {
+                            ...es,
+                            activate: !es.activate,
+                          }
+                        : es
+                    )
+                  );
+                }}
+                className={styles.title}
+              >
+                <span>{e.title}</span>
+                <span>
+                  <Image src={darrow} height={30} width={30} />
+                </span>
+              </h1>
+              <div
+                className={`${styles.section} ${
+                  e.activate === true ? styles.activate : null
+                }`}
+              >
+                {e.items.map((e1, i1) => {
+                  return (
+                    <Link
+                      key={i1}
+                      passHref
+                      href={`/dashboard/product${e1.link}`}
+                    >
+                      <Nav.Link
+                        className={`${"mx-0 my-2 "} ${styles.products}`}
+                      >
+                        <span className={styles.product}>{e1.name}</span>
+                        <span className={styles.product}>{e1.count}</span>
+                      </Nav.Link>
+                    </Link>
+                  );
+                })}
+              </div>
+            </Row>
+          );
+        })}
       </Col>
     </Container>
   );

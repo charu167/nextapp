@@ -9,14 +9,13 @@ import Navbar1 from "../components/navbar/navbar";
 import brain from "../assets/Pics/brain.png";
 import netflix from "../assets/icons/netflix.webp";
 import OffsetContext from "../context/offsetContext";
-import AuthCOntext from "../context/authContext";
 import AuthContext from "../context/authContext";
 
 export default function Home() {
   const { yoffset } = useContext(OffsetContext);
-  const { isLoggedIn } = useContext(AuthContext);
-
   const [yoffset1, setYoffset1] = useState(0);
+
+  const { isLoggedIn, refreshToken } = useContext(AuthContext);
 
   useEffect(() => {
     setYoffset1(yoffset);
@@ -31,6 +30,13 @@ export default function Home() {
             <Row>
               <Col>
                 <h1 className={styles.title}>
+                  {/* <button
+                    onClick={() => {
+                      refreshToken();
+                    }}
+                  >
+                    Refresh
+                  </button> */}
                   <span id={styles.id1}>Rekap and Kreate</span>
                   <span id={styles.id2}>The Future of AI Copywriting</span>
                 </h1>

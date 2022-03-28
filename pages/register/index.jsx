@@ -4,14 +4,18 @@ import Auth from "../../components/auth";
 export default function Index() {
   const input_group = {
     email: "",
-    username: "",
+    mobile: "",
+    name: "",
     password: "",
+    password2: "",
   };
 
   const input_names = [
     { name: "email", type: "email", placeholder: "Enter email" },
-    { name: "username", type: "text", placeholder: "Username" },
+    { name: "mobile", type: "text", placeholder: "Enter mobile number" },
+    { name: "name", type: "text", placeholder: "Name" },
     { name: "password", type: "password", placeholder: "Password" },
+    { name: "password2", type: "password", placeholder: "Confirm Password" },
   ];
 
   const api = "api/register/";
