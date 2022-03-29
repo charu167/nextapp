@@ -38,22 +38,36 @@ export default function Sidebar() {
 
   const [products, setProducts] = useState([
     {
-      title: "marketing",
+      title: "Marketing",
       activate: false,
       items: [
-        { name: "Content Generator", count: 50, link: "/1" },
-        { name: "Facebook Ad Generator", count: 50, link: "/2" },
-        { name: "Tagline Generator", count: 50, link: "/3" },
+        { name: "Content Generator", count: 20, link: "/1" },
+        { name: "Facebook Ad Generator", count: 20, link: "/2" },
+        { name: "Tagline Generator", count: 20, link: "/3" },
       ],
     },
     {
-      title: "academia",
+      title: "Academia",
       activate: false,
       items: [
-        { name: "Email Generator", count: 50, link: "/4" },
-        { name: "Description Generator", count: 50, link: "/5" },
-        { name: "Headline Generator", count: 50, link: "/6" },
+        { name: "Email Generator", count: 20, link: "/4" },
+        { name: "Description Generator", count: 20, link: "/5" },
+        { name: "Headline Generator", count: 20, link: "/6" },
       ],
+    },
+    {
+      title: "Enterprise",
+      activate: false,
+      items: [
+        { name: "Blog Title Generator", count: 20, link: "/7" },
+        { name: "Blog Intro Generator", count: 20, link: "/8" },
+        { name: "Blog Outro Generator", count: 20, link: "/9" },
+      ],
+    },
+    {
+      title: "Summarizer",
+      activate: false,
+      items: [{ name: "Summarizer", count: 20, link: "/summarizer" }],
     },
   ]);
 
@@ -62,7 +76,7 @@ export default function Sidebar() {
       <Col>
         {products.map((e, i) => {
           return (
-            <Row key={i}>
+            <Row key={i} className={styles.row}>
               <h1
                 onClick={() => {
                   setProducts(
@@ -80,7 +94,7 @@ export default function Sidebar() {
               >
                 <span>{e.title}</span>
                 <span>
-                  <Image src={darrow} height={30} width={30} />
+                  <Image src={darrow} height={23} width={18} />
                 </span>
               </h1>
               <div

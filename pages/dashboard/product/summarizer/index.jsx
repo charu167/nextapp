@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import styles from "./id.module.scss";
-import Navbar2 from "../../../components/navbar2";
-import Sidebar from "../../../components/sidebar";
+import Navbar2 from "../../../../components/navbar2";
+import Sidebar from "../../../../components/sidebar";
 import { Form, Button, Spinner } from "react-bootstrap";
-import Toggle from "../../../components/toggle";
+import Toggle from "../../../../components/toggle";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 
-import AuthContext from "../../../context/authContext";
+import AuthContext from "../../../../context/authContext";
 
 export default function Kreate() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -23,8 +23,15 @@ export default function Kreate() {
 
   const [output, setOutput] = useState("");
 
+  //LOGIN CHECK
+  const loginCheck = () => {
+    if (!isLoggedIn()) {
+      Router.push("/login");
+    }
+  };
+
   useEffect(() => {
-    isLoggedIn();
+    loginCheck();
   }, []);
 
   const handleClick = async (event) => {
@@ -36,9 +43,14 @@ export default function Kreate() {
     formdata.append("ratio", input.ratio);
 
     await axios
-      .post("#", formdata)
+      .post("http://18.117.194.28/text_summarizer/", formdata, {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("access"),
+        },
+      })
       .then((res) => {
-        setOutput(res.data);
+        console.log(res.data);
+        setOutput(res.data.content);
         setSpin(0);
       })
       .catch((err) => {
@@ -53,7 +65,7 @@ export default function Kreate() {
       <Sidebar />
 
       <div className={styles.kreate}>
-        <h1 className={styles.title}>{query.id}</h1>
+        <h1 className={styles.title}>Summarizer</h1>
         <div className={styles.input}>
           <div className={styles.left}>
             <Form.Group

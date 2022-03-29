@@ -3,9 +3,9 @@ import styles from "./index.module.scss";
 
 export default function Index() {
   return (
-    <div>
+    <div className={styles.blog}>
       <Navbar1 />
-      <h1>blog</h1>
+      <h1 className={styles.title}>Blog Section</h1>
     </div>
   );
 }

@@ -44,13 +44,13 @@ export default function Auth({
       .post("http://18.117.194.28/" + api, formdata)
       .then((res) => {
         if (res.status === 200) {
+          localStorage.clear();
           localStorage.setItem("access", res.data.token.access);
           localStorage.setItem("refresh", res.data.token.refresh);
         }
         setSpin(0);
         const info = jwtDecode(res.data.token.access);
-        const d = Date(info.exp);
-        if (localStorage.getItem("token")) {
+        if (Date.now() / 1000 < info.exp) {
           Router.push("/dashboard");
         }
       })

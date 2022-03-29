@@ -3,9 +3,9 @@ import styles from "./index.module.scss";
 
 export default function Index() {
   return (
-    <div>
+    <div className={styles.about}>
       <Navbar1 />
-      <h1>about</h1>
+      <h1 className={styles.title}>Brief information about the company</h1>
     </div>
   );
 }
